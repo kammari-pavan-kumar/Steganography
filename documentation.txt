@@ -1,0 +1,334 @@
+
+--------------------------------------------------------------------------------------------
+---------------------------------------------------------------------Steganography ----------------------------------------------------------------
+/*Steganography project input output results*/
+Project Title: Steganography
+----------------------------------------------------------------------Project Info-----------------------------------------------------------------
+Project Info: 
+
+->Steganography is a practice of concealing a file, message, image,or video within another file, message, image, or video
+.Hide secret credentials
+.Detect data forgery
+.Message Passing etc.
+->we would go with digital steganography, In digital method the message is concealed within the lowest bits of images or sound files.
+->The current project expects us to implement LSB (Least Significant Bit) Image Steganography on a .bmp file
+->This project expects us to Encode a message such a way that the quality of the image doesn't change much.
+  So we can do encoding of bits from the message in the LSB of the RGB data
+->Decoding is just reverse process of Encoding
+
+-----------------------------------------------------------------------Encoding --------------------------------------------------------------------
+Sample Input For Encoding (through command line arguments): ./a.out -e beautiful.bmp secret.txt
+
+Sample Output : 
+INFO: Operation type is encode
+INFO: Output File not mentioned. Creating stego.bmp as default
+INFO: Read And Validated Successfully
+INFO: Openning required files
+INFO: Opening SkeltonCode/beautiful.bmp files
+INFO: Opened secret.txt
+INFO: Opened steged_img.bmp
+INFO: Done
+INFO: ## Encoding Procedure Started ##
+INFO: Checking for Skelton code/beautiful.bmp capacity to handle secret.txt
+INFO: width = 1024 height = 768
+INFO: Checking for Secret.txt size
+INFO: Done. Not Empty
+INFO: Done. Found OK
+INFO: Copying Image Header
+INFO: Done
+INFO: Encoding Magic String Signature
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Data
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Copying Left Over Data
+INFO: Done
+### Encoding completed successfully ###
+
+
+
+1. Validation For Encoding
+Sample Input : ./a.out
+Sample Output:
+ERROR: Enter correct arguments
+
+
+2. Validation For Encoding
+Sample Input : ./a.out -e
+Sample Output:
+ERROR: Enter correct arguments
+
+
+3. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp
+Sample Output: 
+INFO: Operation type is encode
+ERROR: enter correct arguments
+
+
+4. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp Secret___
+Sample Output: 
+INFO: Operation type is encode
+ERROR: It is not '.' file
+ERROR: error in read and validate encodin
+
+
+5. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmpabc secret.txt
+Sample Output: 
+INFO: Operation type is encode
+ERROR: error in read and validate encoding
+
+
+6. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp secret.txt New.sh
+Sample Output:
+INFO: Operation type is encode
+ERROR: It is not '.bmp' file
+ERROR: error in read and validate encoding
+
+
+7. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp secret.txt new.bmpsd
+Sample Output:
+INFO: Operation type is encode
+ERROR: error in read and validate encoding
+
+
+
+8. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp secret.txt
+Sample Output:
+INFO: Operation type is encode
+INFO: Output File not mentioned. Creating stego.bmp as default
+INFO: Read And Validated Successfully
+INFO: Openning required files
+INFO: Opening SkeltonCode/beautiful.bmp files
+INFO: Opened secret.txt
+INFO: Opened steged_img.bmp
+INFO: Done
+INFO: ## Encoding Procedure Started ##
+INFO: Checking for Skelton code/beautiful.bmp capacity to handle secret.txt
+INFO: width = 1024 height = 768
+INFO: Checking for Secret.txt size
+INFO: Done. Not Empty
+INFO: Done. Found OK
+INFO: Copying Image Header
+INFO: Done
+INFO: Encoding Magic String Signature
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Data
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Copying Left Over Data
+INFO: Done
+### Encoding completed successfully ###
+
+
+9. Validation For Encoding
+Sample Input: ./a.out -e beautiful.bmp secret.txt New.bmp
+Sample Output: 
+INFO: Operation type is encode
+INFO: Read And Validated Successfully
+INFO: Openning required files
+INFO: Opening SkeltonCode/beautiful.bmp files
+INFO: Opened secret.txt
+INFO: Opened steged_img.bmp
+INFO: Done
+INFO: ## Encoding Procedure Started ##
+INFO: Checking for Skelton code/beautiful.bmp capacity to handle secret.txt
+INFO: width = 1024 height = 768
+INFO: Checking for Secret.txt size
+INFO: Done. Not Empty
+INFO: Done. Found OK
+INFO: Copying Image Header
+INFO: Done
+INFO: Encoding Magic String Signature
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Extension
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Encoding secret.txt File Size
+INFO: Encode int To LSB is Successful
+INFO: Done
+INFO: Encoding secret.txt File Data
+INFO: Encode Byte To LSB is Successful
+INFO: Encode Date To Image is Successful
+INFO: Done
+INFO: Copying Left Over Data
+INFO: Done
+### Encoding completed successfully ###
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------Decoding------------------------------------------------------------------
+Sample Input: ./a.out -d stego.bmp
+Sample Output: 
+INFO: Operation type is decoding        
+INFO: ### Decoding Procedure Started ###
+INFO: Opening required files
+INFO: Opened steged_img.bmp
+INFO: Skip BMP Header
+INFO: Done
+INFO: Decoding Magic String Signature   
+enter magic string :
+#*
+INFO: entered magic string matches
+INFO: Done
+INFO: Decoding Secret File Extension size
+INFO: Done
+INFO: Decoding Outout file(secret file) Extension
+INFO: Opened output.txt
+INFO: Done. Opened all required files
+INFO: Decoding File Size
+INFO: Done
+INFO: Decoding File Data
+INFO: Done
+### Decoding completed successfully ###
+
+
+
+1. Validation For Decoding
+Sample Input : ./a.out
+Sample Output:
+ERROR: Enter correct arguments
+
+
+2. Validation For Decoding
+Sample Input : ./a.out -d
+Sample Output:
+ERROR: Enter correct arguments
+
+
+3. Validation For Decoding
+Sample Input: ./a.out -d stego.bmpabc
+Sample Output: 
+INFO: Operation type is decoding
+ERROR: read and validate decode args failed
+
+
+4. Validation For Decoding
+Sample Input:  ./a.out -d stego
+Sample Output: 
+INFO: Operation type is decoding
+ERROR : stego image extension must be .bmp file
+ERROR: read and validate decode args failed
+
+
+5.Validation For Decoding
+Sample Input: ./a.out -d stego.bmp
+Sample Output: 
+INFO: Operation type is decoding
+INFO: Output File not mentioned. Creating output as default without extension
+INFO: ### Decoding Procedure Started ###
+INFO: Opening required files
+INFO: Opened steged_img.bmp
+INFO: Skip BMP Header
+INFO: Done
+INFO: Decoding Magic String Signature
+enter magic string :
+#*
+INFO: entered magic string matches
+INFO: Done
+INFO: Decoding Secret File Extension size
+INFO: Done
+INFO: Decoding Outout file(secret file) Extension
+INFO: Opened Output.txt
+INFO: Done. Opened all required files
+INFO: Decoding File Size
+INFO: Done
+INFO: Decoding File Data
+INFO: Done
+### Decoding completed successfully ###
+
+
+6. Validation For Decoding
+Sample Input: ./a.out -d stego.bmp New.c
+Sample Output: 
+INFO: Operation type is decoding
+INFO: ### Decoding Procedure Started ###
+INFO: Opening required files
+INFO: Opened steged_img.bmp
+INFO: Skip BMP Header
+INFO: Done
+INFO: Decoding Magic String Signature
+enter magic string :
+#*
+INFO: entered magic string matches
+INFO: Done
+INFO: Decoding Secret File Extension size
+INFO: Done
+INFO: Decoding Outout file(secret file) Extension
+INFO: Opened Output.txt
+INFO: Done. Opened all required files
+INFO: Decoding File Size
+INFO: Done
+INFO: Decoding File Data
+INFO: Done
+### Decoding completed successfully ###
+
+
+7. Validation For Decoding
+Sample Input: ./a.out -d stego.bmp Output.txt
+Sample Output: 
+INFO: Operation type is decoding
+INFO: ### Decoding Procedure Started ###
+INFO: Opening required files
+INFO: Opened steged_img.bmp
+INFO: Skip BMP Header
+INFO: Done
+INFO: Decoding Magic String Signature
+enter magic string :
+#*
+INFO: entered magic string matches
+INFO: Done
+INFO: Decoding Secret File Extension size
+INFO: Done
+INFO: Decoding Outout file(secret file) Extension
+INFO: Opened Output.txt
+INFO: Done. Opened all required files
+INFO: Decoding File Size
+INFO: Done
+INFO: Decoding File Data
+INFO: Done
+### Decoding completed successfully ###
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
